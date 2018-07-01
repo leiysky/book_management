@@ -88,7 +88,6 @@ export async function queryDb(sql, values, conn) {
  * 传入的 func 原型为 (conn): any，抛出异常则被回滚
  *
  * @param  {{(conn: MysqlConn): any}}   func        参数为数据库连接 conn
- * @author 陈宇翔
  */
 export async function transaction(func) {
   /** @type {MysqlConn} */
