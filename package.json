@@ -1,0 +1,23 @@
+{
+  "name": "book_management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "entry.js",
+  "dependencies": {
+    "esm": "^3.0.55",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-express-router": "^0.3.4",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.17.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodemon --inspect=5858 --signal SIGNUP entry.js"
+  },
+  "author": "leiysky",
+  "license": "ISC"
+}

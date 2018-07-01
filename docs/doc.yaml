@@ -1,0 +1,183 @@
+swagger: '2.0'
+info:
+  version: 0.0.2
+  title: API Server
+  description: book management
+tags: 
+    - name: tagName
+      description: tagDescription
+paths:
+  /book:
+      get:
+        tags: 
+          - book
+        summary: 获取所有库存信息
+        description: 获取所有库存信息
+        responses:
+          200:
+            description: OK
+            example: 
+              {
+      "status": "OK",
+      "msg": "OK",
+      "data": {
+          "books": [
+              {
+                  "rid": 1,
+                  "bid": 1,
+                  "stocks": 28,
+                  "sales": 50,
+                  "bookname": "五十度灰",
+                  "price": 32.5
+              },
+              {
+                  "rid": 2,
+                  "bid": 2,
+                  "stocks": 30,
+                  "sales": 40,
+                  "bookname": "金瓶梅",
+                  "price": 28.3
+              }
+          ]
+      },
+      "time": "2018-07-01T08:21:21.907Z"
+  }
+      put:
+        tags: 
+        - book
+        summary: 进货某种书籍
+        description: 进货某种书籍
+        parameters: 
+          - name: body
+            in: body
+            schema:
+              type: object
+              properties:
+                market_id: 
+                  type: number
+                quantity: 
+                  description: 进货量
+                  type: number
+                
+        responses:
+          200:
+            description: OK
+          
+      delete:
+        tags: 
+          - book
+        summary: 按退货单退货
+        description: 按退货单退货
+        parameters: 
+          - name: body
+            in: body
+            schema:
+              type: object
+              properties:
+                refunds:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      bid: 
+                        type: number
+                      quantity:
+                        type: number
+                    
+        responses:
+          200:
+            description: OK
+            
+      
+  /book/sale:
+    post:
+      tags: 
+        - sale
+      summary: 销售图书
+      description: 销售图书
+      parameters: 
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              sales:
+                type: array
+                  items:
+                    type: object
+                    properties:
+                      bid: 
+                        type: number
+                      quantity:
+                        type: number
+      responses:
+        200:
+          description: OK
+    
+  
+  
+  /market:
+      get:
+        tags:
+        - market
+        summary: 获取投标列表
+        description: 获取投标列表
+        parameters: 
+          - name: name
+            in: query
+            type: string
+            description: 投标的书籍名称（如果没有该query则返回全部）
+            required: false
+        responses:
+          200:
+            description: 'OK'
+            examples: 
+              [
+                {
+    "status": "OK",
+    "msg": "OK",
+    "data": {
+        "market": [
+            {
+                "market_id": 1,
+                "bid": 1,
+                "distributor_id": 1,
+                "price": 20,
+                "distributor_name": "中山大学",
+                "bookname": "五十度灰"
+            },
+            {
+                "market_id": 2,
+                "bid": 2,
+                "distributor_id": 1,
+                "price": 15,
+                "distributor_name": "中山大学",
+                "bookname": "金瓶梅"
+            }
+        ]
+    },
+    "time": "2018-07-01T11:15:40.480Z"
+},
+{
+    "status": "OK",
+    "msg": "OK",
+    "data": {
+        "market": [
+            {
+                "market_id": 1,
+                "bid": 1,
+                "distributor_id": 1,
+                "price": 20,
+                "distributor_name": "中山大学",
+                "bookname": "五十度灰"
+            }
+        ]
+    },
+    "time": "2018-07-01T11:26:53.585Z"
+}
+                ]
+            
+            
+        
+        
+      
