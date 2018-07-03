@@ -138,6 +138,8 @@ export function findOneBookByBookname(name) {
     books
   ON 
     repository.bid = books.bid
+  WHERE
+    bookname = ?
   ;`;
 
   const values = [name];
