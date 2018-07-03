@@ -9,6 +9,7 @@ import { transaction } from "../utils/db";
  * @param {next} next 
  */
 export async function retrieveAllBooks(ctx, next) {
+  if(ctx.query.name) return next();
   const data = {};
   data.books = await Book.findAllBooksFromRepo();
   return sendData(ctx, data);
@@ -70,4 +71,11 @@ export async function sellBooks(ctx, next) {
     await Book.insertOneSale(JSON.stringify(sales), conn);
   });
   return sendData(ctx, {}, status, msg);
+}
+
+export async function retrieveOneBookByBookname(ctx, next) {
+  const data = {};
+  const { name } = ctx.query;
+  data.books = await Book.findOneBookByBookname(name);
+  return sendData(ctx, data, 'OK', '查询成功');
 }

@@ -8,6 +8,7 @@ export default router;
 
 router.get('/',
   bookCtrl.retrieveAllBooks,
+  bookCtrl.retrieveOneBookByBookname,
 ).put('/',
   bookCtrl.purchaseOneKindOfBook,
 ).delete('/',

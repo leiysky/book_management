@@ -112,6 +112,11 @@ export function getStocksOfOneBookById(bid, conn) {
   return queryDb(sql, values);
 }
 
+/**
+ * 插入一条销售信息
+ * @param {string} sale 
+ * @param {*} conn 
+ */
 export function insertOneSale(sale, conn) {
   const sql = `
   INSERT INTO
@@ -121,4 +126,20 @@ export function insertOneSale(sale, conn) {
 
   const values = [sale];
   return queryDb(sql, values, conn);
+}
+
+export function findOneBookByBookname(name) {
+  const sql = `
+  SELECT
+    *
+  FROM
+    repository
+  LEFT JOIN
+    books
+  ON 
+    repository.bid = books.bid
+  ;`;
+
+  const values = [name];
+  return queryDb(sql, values);
 }
