@@ -5,6 +5,7 @@ import * as ME from '../utils/ME';
 
 import bookRtr from './book';
 import marketRtr from "./market";
+import stasticRtr from "./statistic";
 
 /**
  * @param {Application} app
@@ -20,6 +21,7 @@ export default function route(app) {
   // 一级路由
   router.use('/book', bookRtr.routes(), bookRtr.allowedMethods());
   router.use('/market', marketRtr.routes(), marketRtr.allowedMethods());
+  router.use('/statistic', stasticRtr.routes(), stasticRtr.allowedMethods());
 
   // 404 guard
   router.use((ctx) => {
