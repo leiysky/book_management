@@ -3,99 +3,86 @@ info:
   version: 0.0.2
   title: API Server
   description: book management
-tags: 
-    - name: tagName
-      description: tagDescription
+tags:
+  - name: tagName
+    description: tagDescription
 paths:
   /book:
-      get:
-        tags: 
-          - book
-        summary: 获取所有库存信息
-        description: 获取所有库存信息
-        responses:
-          200:
-            description: OK
-            example: 
-              {
-      "status": "OK",
-      "msg": "OK",
-      "data": {
-          "books": [
-              {
-                  "rid": 1,
-                  "bid": 1,
-                  "stocks": 28,
-                  "sales": 50,
-                  "bookname": "五十度灰",
-                  "price": 32.5
-              },
-              {
-                  "rid": 2,
-                  "bid": 2,
-                  "stocks": 30,
-                  "sales": 40,
-                  "bookname": "金瓶梅",
-                  "price": 28.3
-              }
-          ]
-      },
-      "time": "2018-07-01T08:21:21.907Z"
-  }
-      put:
-        tags: 
+    get:
+      tags:
         - book
-        summary: 进货某种书籍
-        description: 进货某种书籍
-        parameters: 
-          - name: body
-            in: body
-            schema:
-              type: object
-              properties:
-                market_id: 
-                  type: number
-                quantity: 
-                  description: 进货量
-                  type: number
-                
-        responses:
-          200:
-            description: OK
-          
-      delete:
-        tags: 
-          - book
-        summary: 按退货单退货
-        description: 按退货单退货
-        parameters: 
-          - name: body
-            in: body
-            schema:
-              type: object
-              properties:
-                refunds:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      bid: 
-                        type: number
-                      quantity:
-                        type: number
-                    
-        responses:
-          200:
-            description: OK
-            
-      
+      summary: 获取所有库存信息
+      description: 获取所有库存信息
+      responses:
+        '200':
+          description: OK
+          example:
+            status: OK
+            msg: OK
+            data:
+              books:
+                - rid: 1
+                  bid: 1
+                  stocks: 28
+                  sales: 50
+                  bookname: 五十度灰
+                  price: 32.5
+                - rid: 2
+                  bid: 2
+                  stocks: 30
+                  sales: 40
+                  bookname: 金瓶梅
+                  price: 28.3
+            time: '2018-07-01T08:21:21.907Z'
+    put:
+      tags:
+        - book
+      summary: 进货某种书籍
+      description: 进货某种书籍
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              market_id:
+                type: number
+              quantity:
+                description: 进货量
+                type: number
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - book
+      summary: 按退货单退货
+      description: 按退货单退货
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              refunds:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bid:
+                      type: number
+                    quantity:
+                      type: number
+      responses:
+        '200':
+          description: OK
   /book/sale:
     post:
-      tags: 
+      tags:
         - sale
       summary: 销售图书
       description: 销售图书
-      parameters: 
+      parameters:
         - name: body
           in: body
           schema:
@@ -103,81 +90,174 @@ paths:
             properties:
               sales:
                 type: array
-                  items:
-                    type: object
-                    properties:
-                      bid: 
-                        type: number
-                      quantity:
-                        type: number
+                items:
+                  type: object
+                  properties:
+                    bid:
+                      type: number
+                    quantity:
+                      type: number
       responses:
-        200:
+        '200':
           description: OK
-    
-  
-  
   /market:
-      get:
-        tags:
+    get:
+      tags:
         - market
-        summary: 获取投标列表
-        description: 获取投标列表
-        parameters: 
-          - name: name
-            in: query
-            type: string
-            description: 投标的书籍名称（如果没有该query则返回全部）
-            required: false
-        responses:
-          200:
-            description: 'OK'
-            examples: 
-              [
-                {
-    "status": "OK",
-    "msg": "OK",
-    "data": {
-        "market": [
-            {
-                "market_id": 1,
-                "bid": 1,
-                "distributor_id": 1,
-                "price": 20,
-                "distributor_name": "中山大学",
-                "bookname": "五十度灰"
-            },
-            {
-                "market_id": 2,
-                "bid": 2,
-                "distributor_id": 1,
-                "price": 15,
-                "distributor_name": "中山大学",
-                "bookname": "金瓶梅"
-            }
-        ]
-    },
-    "time": "2018-07-01T11:15:40.480Z"
-},
-{
-    "status": "OK",
-    "msg": "OK",
-    "data": {
-        "market": [
-            {
-                "market_id": 1,
-                "bid": 1,
-                "distributor_id": 1,
-                "price": 20,
-                "distributor_name": "中山大学",
-                "bookname": "五十度灰"
-            }
-        ]
-    },
-    "time": "2018-07-01T11:26:53.585Z"
-}
-                ]
-            
-            
-        
-        
-      
+      summary: 获取投标列表
+      description: 获取投标列表
+      parameters:
+        - name: name
+          in: query
+          type: string
+          description: 投标的书籍名称（如果没有该query则返回全部）
+          required: false
+      responses:
+        '200':
+          description: OK
+          examples:
+            - status: OK
+              msg: OK
+              data:
+                market:
+                  - market_id: 1
+                    bid: 1
+                    distributor_id: 1
+                    price: 20
+                    distributor_name: 中山大学
+                    bookname: 五十度灰
+                  - market_id: 2
+                    bid: 2
+                    distributor_id: 1
+                    price: 15
+                    distributor_name: 中山大学
+                    bookname: 金瓶梅
+              time: '2018-07-01T11:15:40.480Z'
+            - status: OK
+              msg: OK
+              data:
+                market:
+                  - market_id: 1
+                    bid: 1
+                    distributor_id: 1
+                    price: 20
+                    distributor_name: 中山大学
+                    bookname: 五十度灰
+              time: '2018-07-01T11:26:53.585Z'
+  /statistic/sales:
+    get:
+      tags:
+        - statistic
+      summary: 获取销售列表
+      description: 获取销售列表
+      responses:
+        '200':
+          description: OK
+          examples:
+            - status: OK
+              msg: 查询成功
+              data:
+                sales:
+                  - bid: '1'
+                    sale_id: 1
+                    sale_date: '2018-07-01T13:27:18.000Z'
+                    quantity: '3'
+                    bookname: 五十度灰
+                    price: 32.5
+                  - bid: '1'
+                    sale_id: 10
+                    sale_date: '2018-07-01T13:35:51.000Z'
+                    quantity: '10'
+                    bookname: 五十度灰
+                    price: 32.5
+                  - bid: '1'
+                    sale_id: 11
+                    sale_date: '2018-07-01T13:36:18.000Z'
+                    quantity: '10'
+                    bookname: 五十度灰
+                    price: 32.5
+                  - bid: '1'
+                    sale_id: 12
+                    sale_date: '2018-07-01T13:37:14.000Z'
+                    quantity: '10'
+                    bookname: 五十度灰
+                    price: 32.5
+                  - bid: '1'
+                    sale_id: 13
+                    sale_date: '2018-07-01T13:41:47.000Z'
+                    quantity: '10'
+                    bookname: 五十度灰
+                    price: 32.5
+              time: '2018-07-03T12:15:24.375Z'
+  /statistic/refunds:
+    get:
+      tags:
+        - statistic
+      summary: 获取退货列表
+      description: 获取退货列表
+      responses:
+        '200':
+          description: OK
+          examples:
+            - status: OK
+              msg: 查询成功
+              data:
+                refunds:
+                  - bid: '1'
+                    refund_id: 1
+                    refund_date: '2018-07-01T11:47:28.000Z'
+                    quantity: '3'
+                    bookname: 五十度灰
+                    price: 32.5
+                  - bid: '1'
+                    refund_id: 2
+                    refund_date: '2018-07-01T11:47:56.000Z'
+                    quantity: '3'
+                    bookname: 五十度灰
+                    price: 32.5
+                  - bid: '1'
+                    refund_id: 3
+                    refund_date: '2018-07-01T11:48:04.000Z'
+                    quantity: '3'
+                    bookname: 五十度灰
+                    price: 32.5
+                  - bid: '1'
+                    refund_id: 4
+                    refund_date: '2018-07-01T11:48:22.000Z'
+                    quantity: '3'
+                    bookname: 五十度灰
+                    price: 32.5
+              time: '2018-07-03T12:16:24.106Z'
+  /statistic/purchase:
+    get:
+      tags:
+        - statistic
+      summary: 获取进货列表
+      description: 获取进货列表
+      responses:
+        '200':
+          description: OK
+          examples:
+            - status: OK
+              msg: 查询成功
+              data:
+                purchases:
+                  - purchase_id: 1
+                    bid: 1
+                    purchase_quantity: 1
+                    purchase_price: 20
+                    purchase_date: '2018-07-01T11:01:12.000Z'
+                    bookname: 五十度灰
+                  - purchase_id: 2
+                    bid: 1
+                    purchase_quantity: 1
+                    purchase_price: 20
+                    purchase_date: '2018-07-01T11:02:22.000Z'
+                    bookname: 五十度灰
+                  - purchase_id: 5
+                    bid: 1
+                    purchase_quantity: -5
+                    purchase_price: 20
+                    purchase_date: '2018-07-01T11:29:49.000Z'
+                    bookname: 五十度灰
+              time: '2018-07-03T12:03:54.942Z'
