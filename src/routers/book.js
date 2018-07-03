@@ -11,7 +11,7 @@ router.get('/',
   bookCtrl.retrieveOneBookByBookname,
 ).put('/',
   bookCtrl.purchaseOneKindOfBook,
-).delete('/',
+).post('/refund',
   bookCtrl.refundKindsOfBooks,
 );
 
